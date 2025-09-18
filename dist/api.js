@@ -11,9 +11,6 @@ const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 app.use(express_1.default.json());
 const resend = new resend_1.Resend(process.env.RESEND_API_KEY);
-// Ahora el cliente de Discord se pasará como argumento
-// const discordClient = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildInvites] });
-// discordClient.login(process.env.DISCORD_BOT_TOKEN);
 const setupApiRoutes = (discordClient) => {
     app.post('/generate-invite', async (req, res) => {
         const { email, roleId } = req.body;

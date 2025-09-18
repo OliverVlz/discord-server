@@ -45,7 +45,6 @@ const client = new discord_js_1.Client({
         discord_js_1.GatewayIntentBits.GuildInvites,
     ],
 });
-// Reemplazamos la variable global 'invites' por un Map anidado para mayor robustez
 const inviteCache = new Map(); // guildId -> (code -> uses)
 async function populateGuildInvites(guildId) {
     try {
@@ -107,7 +106,7 @@ client.on('guildMemberAdd', async (member) => {
     // Esto es crucial para los invites de un solo uso que desaparecen inmediatamente.
     if (!usedCode) { // Solo si no se encontró en el paso 1
         for (const [code, oldUses] of oldInviteCache) {
-            // Si un invite estaba en nuestro cache antiguo pero ya no está en la colección recién fetched,
+            // Si un invite estaba en nuestro cache antiguo pero ya no está en la colección recién fetched, 
             // significa que probablemente fue un invite de un solo uso que fue consumido y eliminado.
             if (!newInvitesCollection.has(code)) {
                 usedCode = code;
